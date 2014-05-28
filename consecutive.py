@@ -6,7 +6,7 @@
 #Constants
 ALL_DONE_TEXT = 'Processed all rows'
 
-if __person_name__ == '__main__':
+if __name__ == '__main__':
     person = read_person()
     write_person(person)
     print(ALL_DONE_TEXT)

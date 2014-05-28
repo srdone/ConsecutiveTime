@@ -83,12 +83,12 @@ class Person(object):
             self.consecutive_end = modify_for_break(self.activities[0].end_date)
         else:
             self.consecutive_end = self.activities[0].end_date
-
-def modify_for_break(date):
-    '''If a date is equal to the last day before the break window we are ignoring,
-    replace it with the last day of the break. This allows us to treat the ignored
-    break as if it isn't there when we are looking at consecuive dates.'''
-    if date == LAST_DAY_BEFORE_BREAK:
-        return LAST_DAY_OF_BREAK
-    else:
-        return date
+            
+	def modify_for_break(date):
+		'''If a date is equal to the last day before the break window we are ignoring,
+		replace it with the last day of the break. This allows us to treat the ignored
+		break as if it isn't there when we are looking at consecuive dates.'''
+		if date == LAST_DAY_BEFORE_BREAK:
+			return LAST_DAY_OF_BREAK
+		else:
+			return date

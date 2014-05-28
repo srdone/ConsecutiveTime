@@ -8,6 +8,7 @@ import tkinter
 from tkinter import filedialog
 import person
 import activity
+from datetime import datetime, timedelta
 
 #Constants
 PICK_FILE_TEXT = 'Select the raw data file'
@@ -31,16 +32,16 @@ def read_person():
             if a_person:
                 a_person[0].add_activity(Activity(line['Location'], line['Activity Type']
                                             , line['Activity ID']
-                                            , datetime.strptime(line['Start Date'], '%m/%d/%Y').date()
-                                            , datetime.strptime(line['End Date'], '%m/%d/%Y').date()))
+                                            , line['Start Date']
+                                            , line['End Date']))
 
             #If there wasn't an existing person, create a new instance and add the activity on this line
             else:
                 new_person = Person(line['Person ID'], line['Person Name'])
                 new_person.add_activity(Activity(line['Location'], line['Activity Type']
                                             , line['Activity ID']
-                                            , datetime.strptime(line['Start Date'], '%m/%d/%Y').date()
-                                            , datetime.strptime(line['End Date'], '%m/%d/%Y').date()))
+                                            , line['Start Date']
+                                            , line['End Date']))
                 #Append the new person to the person list
                 person.append(new_person)
         return person
