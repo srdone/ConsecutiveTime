@@ -1,4 +1,21 @@
+#! usr/bin/env python3
+
 #Person object to hold the activities and identification information for each person.
+
+#imports
+from datetime import datetime, timedelta
+import activity
+
+#Break days
+#Used to identify a stretch of time that should not be counted as a break in working
+LAST_DAY_BEFORE_BREAK = datetime.strptime('12/23/2013', '%m/%d/%Y').date()
+LAST_DAY_OF_BREAK = datetime.strptime('1/6/2014', '%m/%d/%Y').date()
+
+#Threshold for number of days of consecutive work
+#Change if we want to look at a different time threshold for inclusion in report.
+MONTH_THRESHOLD = 4
+DAYS_IN_MONTH = 30
+DAY_THRESHOLD = DAYS_IN_MONTH * MONTH_THRESHOLD
 
 class Person(object):
     'Holds the list of activities and identifier information for a person'
@@ -66,3 +83,12 @@ class Person(object):
             self.consecutive_end = modify_for_break(self.activities[0].end_date)
         else:
             self.consecutive_end = self.activities[0].end_date
+
+def modify_for_break(date):
+    '''If a date is equal to the last day before the break window we are ignoring,
+    replace it with the last day of the break. This allows us to treat the ignored
+    break as if it isn't there when we are looking at consecuive dates.'''
+    if date == LAST_DAY_BEFORE_BREAK:
+        return LAST_DAY_OF_BREAK
+    else:
+        return date

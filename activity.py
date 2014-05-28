@@ -1,3 +1,5 @@
+#! usr/bin/env python3
+
 #Activity object to hold the details of each activity.
 #Used in person and referenced in consecutive.
 
