@@ -41,8 +41,8 @@ class Person(object):
                 return False
 
             #Set dates to examine, modifying the end dates as needed if we are ignoring the holiday break
-            current_end_date = (modify_for_break(activity.end_date) if ignore_break else activity.end_date)
-            next_end_date = (modify_for_break(self.activities[index + 1].end_date) if ignore_break else self.activities[index + 1].end_date)
+            current_end_date = (self.modify_for_break(activity.end_date) if ignore_break else activity.end_date)
+            next_end_date = (self.modify_for_break(self.activities[index + 1].end_date) if ignore_break else self.activities[index + 1].end_date)
             next_start_date = self.activities[index + 1].start_date
             
             #Determine if there is a break.
@@ -72,7 +72,7 @@ class Person(object):
     def resort_activities(self, ignore_break=True):
         'Sorts the instructor activities by start date/end date'
         self.activities.sort(key=lambda activity:
-                          (activity.start_date, (modify_for_break(activity.end_date) if ignore_break else activity.end_date)))
+                          (activity.start_date, (self.modify_for_break(activity.end_date) if ignore_break else activity.end_date)))
         self.consecutive_start = self.activities[0].start_date
         self.reset_consecutive_dates(ignore_break)
 
@@ -80,15 +80,24 @@ class Person(object):
         '''Resets the start and end of the consecutive amount for the instructor.
         This should is called by resort_activities every time a activity is added'''
         if ignore_break:
-            self.consecutive_end = modify_for_break(self.activities[0].end_date)
+            self.consecutive_end = self.modify_for_break(self.activities[0].end_date)
         else:
             self.consecutive_end = self.activities[0].end_date
             
-	def modify_for_break(date):
-		'''If a date is equal to the last day before the break window we are ignoring,
-		replace it with the last day of the break. This allows us to treat the ignored
-		break as if it isn't there when we are looking at consecuive dates.'''
-		if date == LAST_DAY_BEFORE_BREAK:
-			return LAST_DAY_OF_BREAK
-		else:
-			return date
+    def modify_for_break(self, date):
+    	'''If a date is equal to the last day before the break window we are ignoring,
+    	replace it with the last day of the break. This allows us to treat the ignored
+    	break as if it isn't there when we are looking at consecuive dates.'''
+    	if date == LAST_DAY_BEFORE_BREAK:
+    		return LAST_DAY_OF_BREAK
+    	else:
+    		return date
+
+#if __name__ == __main__:
+#	print(test_create())
+#	print(test_include())
+#	print(test_included_for_break())
+#	print(test_add_activity())
+#	print(test_resort_activities())
+#	print(test_reset_consecutive_dates())
+#	print(test_modify_for_break())

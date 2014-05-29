@@ -18,7 +18,7 @@ HEADERS = ['Location', 'Person ID', 'Person Name', 'Activity Type', 'Activity ID
 
 def write_person(person):
     'Writes the person who are marked to be included to a new .csv file'
-    with open(filedialog.asksaveasfileperson_name(defaultextension='.csv'
+    with open(filedialog.asksaveasfilename(defaultextension='.csv'
                                            , filetypes=[('CSV', '*.csv')]
                                            , initialfile='Processed.csv'
                                            , title=SAVE_FILE_TEXT)

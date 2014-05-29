@@ -1,0 +1,6 @@
+Location,Person ID,Person Name,Activity Type,Activity ID,Start Date,End Date,Included for Break
+UVU,1234,Fred,Python101,ABCDEF,2014-01-01,2014-02-04,False
+UVU,1234,Fred,Python110,FEDCBA,2014-02-01,2014-03-04,False
+BYU,1234,Fred,Python120,APPLE123,2014-03-01,2014-05-30,False
+USU,234,Frank,Jake101,DEKVD39,2013-12-01,2013-12-23,True
+USU,234,Frank,Jake120,AJDME10,2014-01-07,2014-04-01,True
