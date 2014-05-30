@@ -5,6 +5,7 @@
 #imports
 from datetime import datetime, timedelta
 import activity
+import unittest
 
 #Break days
 #Used to identify a stretch of time that should not be counted as a break in working
@@ -93,11 +94,28 @@ class Person(object):
     	else:
     		return date
 
-#if __name__ == __main__:
-#	print(test_create())
-#	print(test_include())
-#	print(test_included_for_break())
-#	print(test_add_activity())
-#	print(test_resort_activities())
-#	print(test_reset_consecutive_dates())
-#	print(test_modify_for_break())
+class TestPerson(unittest.TestCase):
+	
+	def setUp(self):
+		self.ID = 1234
+		self.Name = 'Fred'
+		self.person_test = Person(self.ID, self.Name)
+		self.activity_1 = activity.Activity('UVU', 'Beginning Python', '00000'
+										, '12/1/2013', '12/30/2013')
+		self.activity_2 = activity.Activity('UVU', 'Beginning Python', '00000'
+										, '12/15/2013', '1/20/2014')
+	
+	def test_person_creation(self):
+		self.assertEqual(self.person_test.person_id, self.ID)
+		self.assertEqual(self.person_test.person_name, self.Name)
+	
+	def test_add_1_activity(self):
+		self.person_test.add_activity(self.activity_1)
+		self.assertEqual(self.person_test.activities[0], self.activity_1)
+		self.assertEqual(self.person_test.consecutive_start, self.activity_1.start_date)
+		self.assertEqual(self.person_test.consecutive_end, self.activity_1.end_date)
+	
+	#Need to test each function, but also interaction between different functions
+
+if __name__ == '__main__':
+	unittest.main()
