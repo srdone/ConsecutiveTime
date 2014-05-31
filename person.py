@@ -55,7 +55,7 @@ class Person(object):
 
 	def resort_activities(self, ignore_break=True):
 		'Sorts the instructor activities by start date/end date'
-		self.activities.sort(key=lambda activity:
+		self.activities.sort(key=lambda  activity:
 						  (activity.start_date, (self.modify_for_break(activity.end_date) if ignore_break else activity.end_date)))
 		self.consecutive_start = self.activities[0].start_date
 		self.reset_consecutive_dates(ignore_break)
@@ -190,10 +190,10 @@ class TestPerson(unittest.TestCase):
 	def test_sort_2(self):
 		'Sort orders activities with the same start, but different end dates with oldest end date activity last'
 		person_test = Person(self.ID, self.Name)
-		person_test.add_activity(self.activity_end_before_activity_1)
 		person_test.add_activity(self.activity_1)
-		self.assertEqual(person_test.activities[0], self.activity_1)
-		self.assertEqual(person_test.activities[1], self.activity_end_before_activity_1)
+		person_test.add_activity(self.activity_end_before_activity_1)
+		self.assertEqual(person_test.activities[0], self.activity_end_before_activity_1)
+		self.assertEqual(person_test.activities[1], self.activity_1)
 	
 	def test_modify_for_break(self):
 		'modify_for_break modifies last day before break to last day of break'
