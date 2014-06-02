@@ -24,36 +24,4 @@ class Activity(object):
         	self.end_date = end_date
         self.location = location
 	
-class TestActivity(unittest.TestCase):
-	
-	def setUp(self):
-		self.pattern = '%m/%d/%Y'
-		#Activity using a defined date pattern
-		self.activity_pattern = Activity('UVU', 'Beginning Python', '00000'
-										, '12/1/2013', '12/30/2013', self.pattern)
-		#Activity using default date pattern
-		self.activity_no_pattern = Activity ('UVU', 'Beginning Python', '00000'
-										, '12/1/2013', '12/30/2013')
-	
-	def test_activity_pattern(self):
-		'Test activity creation with a defined date pattern'
-		self.assertEqual(self.activity_pattern.location, 'UVU')
-		self.assertEqual(self.activity_pattern.activity_id, '00000')
-		self.assertEqual(self.activity_pattern.start_date, datetime.strptime('12/1/2013', self.pattern).date())
-		self.assertEqual(self.activity_pattern.end_date, datetime.strptime('12/30/2013', self.pattern).date())
-	
-	def test_activity_no_pattern(self):
-		'Test activity creation using the default date pattern'
-		self.assertEqual(self.activity_no_pattern.location, 'UVU')
-		self.assertEqual(self.activity_no_pattern.activity_id, '00000')
-		self.assertEqual(self.activity_no_pattern.start_date, datetime.strptime('12/1/2013', self.pattern).date())
-		self.assertEqual(self.activity_no_pattern.end_date, datetime.strptime('12/30/2013', self.pattern).date())
-	
-	def tearDown(self):
-		del self.activity_pattern
-		del self.activity_no_pattern
-
-if __name__ == '__main__':
-	unittest.main()
-	
 
